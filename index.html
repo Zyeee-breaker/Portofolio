@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio Tejo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Header */
+        .header {
+            background: #fff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 15px 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #0d6efd;
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: url(ast-bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 60px 30px;
+        }
+
+        .section2 {
+            background: linear-gradient(to bottom, rgb(7, 7, 7), rgb(54, 54, 54));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 60px 30px;
+        }
+
+        .section3 {
+            background: linear-gradient(to bottom, rgb(54, 54, 54), rgb(7, 7, 7));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 60px 30px;
+        }
+
+        .section4 {
+            background: linear-gradient(to bottom, rgb(7, 7, 7), rgb(54, 54, 54));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 60px 30px;
+        }
+
+        .container-doc {
+            background: linear-gradient(to bottom, rgb(54, 54, 54), rgb(7, 7, 7));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 50vh;
+            max-width: 100vh;
+            width: 100%;
+            padding: 60px 30px;
+            box-shadow: 2px 4px 8px white;
+            border-radius: 2%;
+
+        }
+
+        .hero-section h1 {
+            color: #0d6efd;
+        }
+
+        .hero-section .btn {
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .images {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .images::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #AEE2FF, #B799FF, #ACBCFF);
+            z-index: 0;
+            animation: gradientGlow 4s infinite alternate;
+            filter: blur(20px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .images {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Gradient Glow Background */
+        .images::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #AEE2FF, #B799FF, #ACBCFF, #E6FFFD);
+            background-size: 300% 300%;
+            background-position: 0% 50%;
+            animation: gradientGlow 5s ease-in-out infinite;
+            filter: blur(25px);
+            opacity: 0;
+            /* sinkron dengan gambar */
+            z-index: 0;
+        }
+
+        /* Gambar Profil */
+        .images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            animation: Images 5s infinite ease-in-out;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            max-width: 300px;
+            max-height: 500px;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to bottom, rgb(54, 54, 54), rgb(7, 7, 7));
+        }
+
+        .doc {
+            max-width: 250px;
+            max-height: 400px;
+            width: 100%;
+            height: 100%;
+            transition: all 1s;
+        }
+
+        .doc:hover {
+            scale: 1.1;
+        }
+
+        .btn-show {
+            background: transparent;
+            color: white;
+            max-width: 60px;
+            width: 100%;
+            padding: 2%;
+            border-radius: 5%;
+            border: 2px solid white;
+            transition: all 0.5s;
+        }
+
+        .btn-show:hover {
+            scale: 1.1;
+            color: black;
+            background-color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .images {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Animasi untuk gambar dan mengontrol opacity gradient */
+        @keyframes Images {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(-10deg);
+            }
+
+            25% {
+                opacity: 1;
+                transform: scale(1) rotate(-5deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(1deg);
+            }
+
+            75% {
+                opacity: 1;
+                transform: scale(1) rotate(5deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8) rotate(10deg);
+            }
+        }
+
+        /* Gradient Glow Bergerak dan Berubah Warna */
+        @keyframes gradientGlow {
+            0% {
+                background-position: 0% 50%;
+                opacity: 0;
+                rotate: 0deg;
+            }
+
+            25% {
+                background-position: 25% 50%;
+                background: linear-gradient(135deg, #A294F9, #CDC1FF, black);
+                opacity: 1;
+                rotate: 90deg;
+            }
+
+            50% {
+                background-position: 50% 50%;
+                background: linear-gradient(135deg, #ff9a9e, #fad0c4, black);
+                opacity: 1;
+                rotate: 180deg;
+            }
+
+            75% {
+                background-position: 75% 50%;
+                background: linear-gradient(135deg, #a18cd1, #fbc2eb, Black);
+                opacity: 1;
+                rotate: 90deg;
+            }
+
+            100% {
+                background-position: 100% 50%;
+                opacity: 0;
+                rotate: 360deg;
+            }
+        }
+
+        #hasilKontak {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: #212529;
+            color: white;
+            z-index: 9999;
+            padding: 20px;
+            border-bottom: 2px solid #444;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        canvas {
+            margin: 2rem auto;
+            display: block;
+            background: transparent;
+            color: white;
+            width: 100%;
+            max-width: 600px;
+            height: 400px !important;
+            /* Tinggi tetap */
+        }
+
+        .chart-fixed {
+            width: 100%;
+            max-width: 600px;
+            height: 400px !important;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header text-center">
+        <h1>Portofolio</h1>
+        <nav>
+            <ul class="d-flex justify-content-center flex-wrap">
+                <li><a href="#Beranda">Beranda</a></li>
+                <li><a href="#AboutMe">About Me</a></li>
+                <li><a href="#skil">Skill</a></li>
+                <li><a href="#document">Document</a></li>
+                <li><a href="#contact">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Hero / Beranda -->
+    <section id="Beranda"
+        class="hero-section d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+        <div class="text-center text-md-start" data-aos="fade-up">
+            <h1 class="display-4 fw-bold">Zyeee</h1>
+            <p class="lead text-white">💡 Siswa SMK | Calon Web Developer</p>
+            <p class="text-white">Saya adalah siswa SMK yang memiliki ketertarikan dalam dunia teknologi, pemrograman,
+                dan
+                desain digital. Siap belajar dan berkembang!</p>
+            <a href="#Contact" class="btn btn-primary mt-3">Hubungi Saya</a>
+        </div>
+        <div class="images text-center me-5">
+            <img src="Profile.jpg"
+                alt="Foto Tejo" />
+        </div>
+    </section>
+
+    <section id="AboutMe"
+        class="section2 text-white d-flex flex-column align-items-center justify-content-center text-start py-5">
+        <div class="container" data-aos="zoom-in-right">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="mb-4 text-center">About Me</h2>
+                    <p class="fs-5">
+                        Saya <strong>Zyeee</strong>, seorang siswa SMK yang memiliki minat besar dalam
+                        teknologi,
+                        <span class="text-primary">web development</span>, dan dunia kreatif, <span
+                            class="text-primary">Developer Game</span>. Saya senang belajar hal
+                        baru dan
+                        terbuka terhadap pengalaman baru.
+                    </p>
+                    <p class="fs-5">Saya cukup berpengalaman di bidang IT, terutama di bagian desain
+                        <strong>UI/UX</strong>.
+                    </p>
+
+                    <div class="mb-3">
+                        <h5 class="text-info">Keahlian Saya:</h5>
+                        <h5 class="text-info fw-bold mb-3">💼 Keahlian Saya:</h5>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">💡</span>
+                                    <div>
+                                        <strong>UI/UX Design</strong><br>
+                                        <small>Menggunakan Figma dan prinsip desain modern</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">⚙️</span>
+                                    <div>
+                                        <strong>React & Laravel</strong><br>
+                                        <small>Frontend interaktif & Backend yang kuat</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">📱</span>
+                                    <div>
+                                        <strong>Responsive Web</strong><br>
+                                        <small>Optimasi tampilan untuk semua ukuran layar</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">🛠️</span>
+                                    <div>
+                                        <strong>Git & Version Control</strong><br>
+                                        <small>Kolaborasi proyek dengan GitHub & GitLab</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">🎨</span>
+                                    <div>
+                                        <strong>Blender</strong><br>
+                                        <small>Desain 3D, modeling, dan animasi dasar</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div
+                                    class="d-flex align-items-center bg-transparent border rounded p-3 shadow-sm text-white">
+                                    <span class="me-3 fs-4">🕹️</span>
+                                    <div>
+                                        <strong>Unreal Engine</strong><br>
+                                        <small>Pemrograman dan desain visual untuk game</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-info">Tools yang Saya Gunakan:</h5>
+                        <div class="d-flex flex-wrap gap-3">
+                            <span class="badge bg-primary">VS Code</span>
+                            <span class="badge bg-secondary">Figma</span>
+                            <span class="badge bg-danger">Photoshop</span>
+                            <span class="badge bg-warning text-dark">MySQL</span>
+                            <span class="badge bg-dark">GitHub</span>
+                            <span class="badge bg-info text-dark">Blender</span>
+                        </div>
+                    </div>
+
+                    <p class="fs-5 mt-4">
+                        Saya percaya bahwa setiap produk digital harus memiliki <span
+                            class="text-success">fungsi</span>,
+                        <span class="text-warning">keindahan</span>, dan <span class="text-danger">empati terhadap
+                            pengguna</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skil" class="section3 text-white py-5">
+        <div class="container text-center">
+            <h2 class="mb-5">Skill</h2>
+
+            <!-- Dua di atas -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-6 mb-4" data-aos="fade-up-right">
+                    <canvas id="barChart" class="chart-fixed"></canvas>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up-left">
+                    <canvas id="pieChart" class="chart-fixed"></canvas>
+                </div>
+            </div>
+
+            <!-- Satu di tengah bawah -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-6 mb-4" data-aos="fade-up-right">
+                    <canvas id="lineChart" class="chart-fixed"></canvas>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up-left">
+                    <canvas id="blenderUnrealChart" class="chart-fixed"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="document"
+        class="section4 text-white d-flex flex-column align-items-center justify-content-center text-center">
+        <h2 class="text-white mb-5">Document</h2>
+        <div class="container-doc" data-aos="zoom-in">
+            <div class="card text-white d-flex flex-column align-items-center border" data-aos="zoom-out-right">
+                <img src="woman.svg" class="doc mb-3">
+                <h3 class="mb-3">Project 1</h3>
+                <button type="submit" class="btn-show mb-3">Show</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5" style="background: linear-gradient(to bottom, rgb(7, 7, 7), rgb(54, 54, 54));">
+        <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center>
+            <div class=" text-center mb-5">
+            <h2 class="text-white fw-bold">📬 Contact Me</h2>
+            <p class="text-white-50">Silakan hubungi saya melalui formulir di bawah ini</p>
+        </div>
+
+        <form data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" id="formKontak"
+            onsubmit="event.preventDefault(); simpanKontak();">
+            <div class=" row g-4 p-3 mx-5">
+                <div class="col-md-6">
+                    <label for="name" class="form-label text-white">Nama Lengkap</label>
+                    <input type="text" class="form-control shadow-sm" id="name" placeholder="Masukkan nama Anda">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label text-white">Email</label>
+                    <input type="email" class="form-control shadow-sm" id="email" placeholder="Masukkan email Anda">
+                </div>
+                <div class="col-12">
+                    <label for="comment" class="form-label text-white">Pesan</label>
+                    <textarea class="form-control shadow-sm" id="comment" rows="5"
+                        placeholder="Tulis pesan Anda..."></textarea>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-outline-light px-5 py-2 mt-3 rounded-pill">
+                        Kirim Pesan
+                    </button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </section>
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+
+                <!-- Kiri: Info Kontak -->
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h5 class="fw-bold">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Email:</strong> <a href="mailto:testing@example.com"
+                                class="text-white text-decoration-none">tejoyudiantoro247@gmail.com</a></li>
+                        <li><strong>No. Telp:</strong> (+62) 882 0035 09995</li>
+                        <li><strong>Location:</strong> Indonesia</li>
+                    </ul>
+                </div>
+
+                <!-- Kanan: Copyright -->
+                <div class="col-md-6 text-md-end text-center">
+                    <p class="mb-0">© <span id="year"></span> Tejo Yudiantoro. All rights reserved.</p>
+                </div>
+                <div class="dropdown d-inline-block">
+                    <button id="btnBukaVerifikasi" class="btn btn-sm btn-outline-light dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                        🔐 Verifikasi Admin
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 300px;">
+                        <li>
+                            <input type="email" id="aksesEmail" class="form-control mb-2" placeholder="Masukkan email">
+                            <button onclick="verifikasiAkses()" class="btn btn-sm btn-primary w-100">Verifikasi & Lihat
+                                Kontak</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+    <!-- Format Tahun Otomatis -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        // Fungsi untuk simpan data kontak ke localStorage
+        function simpanKontak() {
+            const nama = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const pesan = document.getElementById("comment").value;
+
+            // Ambil data lama dari localStorage (jika ada)
+            let daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+
+            // Tambahkan data baru
+            const kontakBaru = {
+                nama,
+                email,
+                pesan,
+                waktu: new Date().toLocaleString()
+            };
+            daftarKontak.push(kontakBaru);
+
+            // Simpan kembali ke localStorage
+            localStorage.setItem("daftarKontak", JSON.stringify(daftarKontak));
+
+            alert("Terima kasih, data kamu sudah disimpan!");
+            document.getElementById("formKontak").reset();
+        }
+
+        // Tahun otomatis
+        const elYear = document.getElementById('year');
+        if (elYear) elYear.textContent = new Date().getFullYear();
+
+        // AOS
+        AOS.init();
+
+        // Simpan data kontak ke localStorage
+        function simpanKontak() {
+            const nama = document.getElementById("name")?.value || "";
+            const email = document.getElementById("email")?.value || "";
+            const pesan = document.getElementById("comment")?.value || "";
+
+            if (!nama || !email || !pesan) {
+                alert("Mohon lengkapi semua data!");
+                return;
+            }
+
+            const daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+            const kontakBaru = {
+                nama,
+                email,
+                pesan,
+                waktu: new Date().toLocaleString()
+            };
+
+            daftarKontak.push(kontakBaru);
+            localStorage.setItem("daftarKontak", JSON.stringify(daftarKontak));
+
+            alert("Terima kasih, data kamu sudah disimpan!");
+            document.getElementById("formKontak")?.reset();
+        }
+
+        function verifikasiAkses() {
+            const emailMasuk = document.getElementById("aksesEmail")?.value.trim().toLowerCase();
+            const emailPemilik = "zyeeee33@gmail.com";
+            const hasilKontak = document.getElementById("hasilKontak");
+
+            localStorage.setItem("aksesAdmin", "true");
+            localStorage.setItem("emailTerverifikasi", emailMasuk);
+            localStorage.setItem("waktuLogin", Date.now());
+
+            if (emailMasuk === emailPemilik) {
+                // Simpan status ke localStorage
+                localStorage.setItem("aksesAdmin", "true");
+                localStorage.setItem("emailTerverifikasi", emailMasuk);
+
+                alert("✅ Email berhasil diverifikasi!");
+                location.reload(); // Muat ulang untuk mengubah tampilan tombol
+            } else {
+                if (hasilKontak) {
+                    hasilKontak.innerHTML = `<div class="alert alert-danger">❌ Akses ditolak. Email tidak dikenali.</div>`;
+                } else {
+                    alert("❌ Akses ditolak. Email tidak dikenali.");
+                }
+            }
+        }
+
+        function bukaFormVerifikasi() {
+            const formDiv = document.getElementById("formVerifikasi");
+            if (formDiv) {
+                formDiv.classList.remove("d-none");
+            }
+        }
+        function logoutAdmin() {
+            localStorage.removeItem("aksesAdmin");
+            localStorage.removeItem("emailTerverifikasi");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnVerifikasi = document.getElementById('btnBukaVerifikasi');
+            const emailTersimpan = localStorage.getItem('emailTerverifikasi');
+            const emailPemilik = "tejoyudiantoro247@gmail.com";
+
+            // Jika sudah diverifikasi sebelumnya
+            if (emailTersimpan === emailPemilik) {
+                btnVerifikasi.innerHTML = '✅ Terverifikasi';
+                btnVerifikasi.classList.remove('btn-outline-light');
+                btnVerifikasi.classList.add('btn-success');
+                btnVerifikasi.disabled = false;
+
+                // Optional: langsung buka halaman list kontak jika diklik
+                btnVerifikasi.onclick = () => {
+                    window.location.href = "list-contact.html"; // atau halaman khusus admin
+                };
+            }
+
+            const waktuLogin = localStorage.getItem("waktuLogin");
+
+            if (waktuLogin) {
+                const sekarang = Date.now();
+                const selisih = sekarang - parseInt(waktuLogin); // dalam milidetik
+                const batasWaktu = 45 * 60 * 1000;
+                console.log("batasWaktu: " + batasWaktu);
+                console.log("selisih: " + selisih);
+
+                // 45 menit
+                if (selisih > batasWaktu) {
+                    logoutAdmin(); // auto logout jika lewat
+                } else {
+                    // Jadwalkan auto logout setelah sisa waktu
+                    const sisaWaktu = batasWaktu - selisih;
+                    setTimeout(logoutAdmin, sisaWaktu);
+                }
+                setInterval(() => {
+                    const waktuLogin = localStorage.getItem("waktuLogin");
+                    if (waktuLogin) {
+                        const sekarang = Date.now();
+                        const selisih = sekarang - parseInt(waktuLogin);
+                        const batasWaktu = 45 * 60 * 1000;
+                        const sisa = batasWaktu - selisih;
+                    } else {
+                        console.log("⚠️ Tidak ada waktu login tersimpan.");
+                    }
+                }, 60 * 1000);
+
+            }
+        });
+        const textColor = 'white';
+
+        const skillLabels = [
+            'HTML', 'CSS', 'JavaScript', 'Bootstrap 5',
+            'Tailwind', 'Laravel', 'SQL', 'Control Code', 'React'
+        ];
+
+        const skillValues = [70, 80, 50, 50, 50, 75, 50, 30, 50];
+
+        // Konfigurasi umum: teks dan garis putih
+        const chartOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)' // garis vertikal putih transparan
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)' // garis horizontal putih transparan
+                    },
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        };
+
+        // Bar Chart
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: skillLabels,
+                datasets: [{
+                    label: 'Tingkat Penggunaan (%)',
+                    data: skillValues,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Pie Chart (tidak pakai sumbu, jadi hanya legend yang diubah)
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: skillLabels,
+                datasets: [{
+                    label: 'Distribusi Skill',
+                    data: skillValues,
+                    backgroundColor: [
+                        '#f94144', '#f3722c', '#f9c74f', '#90be6d',
+                        '#43aa8b', '#577590', '#277da1', '#9d4edd', '#ffafcc'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: textColor
+                        }
+                    }
+                }
+            }
+        });
+
+        // Line Chart
+        new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: skillLabels,
+                datasets: [{
+                    label: 'Perkembangan Skill',
+                    data: skillValues,
+                    fill: false,
+                    borderColor: '#36a2eb',
+                    tension: 0.3
+                }]
+            },
+            options: chartOptions
+        });
+        // Blender & Unreal Engine Doughnut Chart
+        new Chart(document.getElementById('blenderUnrealChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Blender (3D Design)', 'Unreal Engine (Game Dev)'],
+                datasets: [{
+                    data: [60, 40], // ganti sesuai levelmu
+                    backgroundColor: ['#8e44ad', '#2c3e50'],
+                    borderColor: ['#ecf0f1', '#ecf0f1'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.label}: ${context.parsed}% Penguasaan`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
