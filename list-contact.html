@@ -41,7 +41,7 @@
             <h2 class="mb-0">📋 Daftar Kontak Masuk</h2>
             <button class="btn btn-outline-light" onclick="logoutAdmin()">Logout</button>
         </div>
-
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Cari nama/email..." oninput="filterKontak(this.value)">
         <div class="card card-dark shadow p-3">
             <div id="hasilKontak">
                 <div class="table-responsive">
