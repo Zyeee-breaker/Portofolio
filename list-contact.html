@@ -41,7 +41,10 @@
             <h2 class="mb-0">📋 Daftar Kontak Masuk</h2>
             <button class="btn btn-outline-light" onclick="logoutAdmin()">Logout</button>
         </div>
-        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Cari nama/email..." oninput="filterKontak(this.value)">
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Cari nama/email..."
+            oninput="filterKontak(this.value)">
+        <button class="btn btn-outline-info mt-2" onclick="exportKontak()">📁 Export Kontak</button>
+
         <div class="card card-dark shadow p-3">
             <div id="hasilKontak">
                 <div class="table-responsive">
@@ -123,6 +126,7 @@
                     <td>${item.waktu}</td>
                     <td><span class="badge bg-${getWarnaStatus(item.status)}">${item.status}</span></td>
                     <td>${tombolUbah}</td>
+                    <td><button class="btn btn-sm btn-outline-danger" onclick="hapusKontak(${index})">Hapus</button></td>
                   </tr>
                 `;
             });
@@ -149,23 +153,57 @@
             }
         });
 
-      function kirimNotifikasi() {
-    const radioTerpilih = document.querySelector('input[name="selectPesan"]:checked');
-    if (!radioTerpilih) return alert("Pilih pesan terlebih dahulu!");
-    const index = radioTerpilih.value;
-    const daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
-    const data = daftarKontak[index];
+        function kirimNotifikasi() {
+            const radioTerpilih = document.querySelector('input[name="selectPesan"]:checked');
+            if (!radioTerpilih) return alert("Pilih pesan terlebih dahulu!");
+            const index = radioTerpilih.value;
+            const daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+            const data = daftarKontak[index];
 
-    if (Notification.permission === "granted") {
-        new Notification("🔔 Notifikasi ke " + data.nama, {
-            body: `Pesanmu sedang diproses.`,
-            icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png"
-        });
-    } else {
-        alert("Izin notifikasi belum diberikan atau ditolak.");
-    }
-}
+            if (Notification.permission === "granted") {
+                new Notification("🔔 Notifikasi ke " + data.nama, {
+                    body: `Pesanmu sedang diproses.`,
+                    icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png"
+                });
+            } else {
+                alert("Izin notifikasi belum diberikan atau ditolak.");
+            }
+        }
 
+        function filterKontak(keyword) {
+            const daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+            const tbody = document.getElementById("isiTabelKontak");
+            tbody.innerHTML = "";
+
+            daftarKontak.forEach((item, index) => {
+                if (
+                    item.nama.toLowerCase().includes(keyword.toLowerCase()) ||
+                    item.email.toLowerCase().includes(keyword.toLowerCase())
+                ) {
+                    let disabled = item.status === "Down" ? "disabled" : "";
+                    let tombolUbah = item.status === "Diproses"
+                        ? `<button class="btn btn-sm btn-success" onclick="ubahStatus(${index}, 'Selesai')" ${disabled}>Tandai Selesai</button>`
+                        : item.status === "Belum"
+                            ? `<button class="btn btn-sm btn-warning" onclick="ubahStatus(${index}, 'Diproses')" ${disabled}>Proses</button>`
+                            : item.status === "Selesai"
+                                ? `<button class="btn btn-sm btn-dark" onclick="ubahStatus(${index}, 'Down')" ${disabled}>Tandai Down</button>`
+                                : `<span class="text-muted">Selesai</span>`;
+
+                    tbody.innerHTML += `
+                <tr>
+                    <td><input type="radio" name="selectPesan" value="${index}" onclick="aktifkanTombol(${index})" ${disabled}></td>
+                    <td>${index + 1}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.email}</td>
+                    <td class="pesan-cell" title="${item.pesan}">${item.pesan}</td>
+                    <td>${item.waktu}</td>
+                    <td><span class="badge bg-${getWarnaStatus(item.status)}">${item.status}</span></td>
+                    <td>${tombolUbah}</td>
+                </tr>
+            `;
+                }
+            });
+        }
 
         function tutupHasilKontak() {
             window.location.href = "index.html";
@@ -190,6 +228,15 @@
         }
 
         document.getElementById("btnKirimNotifikasi").addEventListener("click", kirimNotifikasi);
+        function exportKontak() {
+            const data = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+            const file = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(file);
+            a.download = "kontak.json";
+            a.click();
+        }
+
     </script>
 </body>
 
