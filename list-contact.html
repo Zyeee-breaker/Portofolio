@@ -149,17 +149,23 @@
             }
         });
 
-        function kirimNotifikasi() {
-            // Cek apakah notifikasi diizinkan
-            if (Notification.permission === "granted") {
-                new Notification("🔔 Notifikasi!", {
-                    body: "Notifikasi berhasil dikirim ke pengguna.",
-                    icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png" // opsional icon
-                });
-            } else {
-                alert("Izin notifikasi belum diberikan atau ditolak.");
-            }
-        }
+      function kirimNotifikasi() {
+    const radioTerpilih = document.querySelector('input[name="selectPesan"]:checked');
+    if (!radioTerpilih) return alert("Pilih pesan terlebih dahulu!");
+    const index = radioTerpilih.value;
+    const daftarKontak = JSON.parse(localStorage.getItem("daftarKontak")) || [];
+    const data = daftarKontak[index];
+
+    if (Notification.permission === "granted") {
+        new Notification("🔔 Notifikasi ke " + data.nama, {
+            body: `Pesanmu sedang diproses.`,
+            icon: "https://cdn-icons-png.flaticon.com/512/1827/1827392.png"
+        });
+    } else {
+        alert("Izin notifikasi belum diberikan atau ditolak.");
+    }
+}
+
 
         function tutupHasilKontak() {
             window.location.href = "index.html";
