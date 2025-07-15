@@ -500,29 +500,31 @@
             <p class="text-white-50">Silakan hubungi saya melalui formulir di bawah ini</p>
         </div>
 
-        <form data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" id="formKontak"
-            onsubmit="event.preventDefault(); simpanKontak();">
-            <div class=" row g-4 p-3 mx-5">
-                <div class="col-md-6">
-                    <label for="name" class="form-label text-white">Nama Lengkap</label>
-                    <input type="text" class="form-control shadow-sm" id="name" placeholder="Masukkan nama Anda">
-                </div>
-                <div class="col-md-6">
-                    <label for="email" class="form-label text-white">Email</label>
-                    <input type="email" class="form-control shadow-sm" id="email" placeholder="Masukkan email Anda">
-                </div>
-                <div class="col-12">
-                    <label for="comment" class="form-label text-white">Pesan</label>
-                    <textarea class="form-control shadow-sm" id="comment" rows="5"
-                        placeholder="Tulis pesan Anda..."></textarea>
-                </div>
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-outline-light px-5 py-2 mt-3 rounded-pill">
-                        Kirim Pesan
-                    </button>
-                </div>
-            </div>
-        </form>
+       <form action="https://formsubmit.co/tejoyudiantoro247@gmail.com" method="POST">
+  <div class="row g-4 p-3 mx-5">
+    <div class="col-md-6">
+      <label for="name" class="form-label text-white">Nama Lengkap</label>
+      <input type="text" class="form-control shadow-sm" name="name" placeholder="Masukkan nama Anda" required>
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label text-white">Email</label>
+      <input type="email" class="form-control shadow-sm" name="email" placeholder="Masukkan email Anda" required>
+    </div>
+    <div class="col-12">
+      <label for="message" class="form-label text-white">Pesan</label>
+      <textarea class="form-control shadow-sm" name="message" rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+    </div>
+    <div class="col-12 text-center">
+      <button type="submit" class="btn btn-outline-light px-5 py-2 mt-3 rounded-pill">
+        Kirim Pesan
+      </button>
+    </div>
+  </div>
+
+  <!-- Redirect setelah kirim -->
+  <input type="hidden" name="_next" value="https://yourgithubusername.github.io/thanks.html">
+</form>
+
         </div>
     </section>
     <footer class="bg-dark text-white py-4">
