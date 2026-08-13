@@ -37,8 +37,60 @@
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </header>
-    <section id="home" class="h-screen bg-gray-200 flex items-center justify-center">
-        <h1 class="text-4xl font-bold">Welcome to My Portfolio</h1>
+    <section id="home"
+        class="relative overflow-hidden bg-gradient-to-b from-black via-gray-500 to-white w-full h-screen flex items-center justify-around gap-8 px-8 md:px-16 lg:px-32">
+        <div id="floating-icons" class="absolute inset-0 flex items-center justify-center">
+            <div class="relative w-full h-full" style="width: 100vw; height: 100vh; max-width: 1000px; max-height: 900px;">
+                <!-- Floating icons will be appended here by JavaScript -->
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <div class="flex flex-col justify-center gap-2">
+                <h1 class="text-4xl font-bold text-white font-serif">Welcome to My Website</h1>
+                <span class="text-sm text-gray-300">Crafting Digital Excellence</span>
+                <span class="text-md text-gray-300">Accepting services for creating, developing, and testing websites,
+                    games,
+                    videos, etc.</span>
+                <span class="text-lg text-gray-200 invitation">want to know more</span>
+                <span class="flex items-center gap-2">
+                    <button class="w-full px-6 py-3 bg-transparent text-gray-200 font-semibold border-2 border-gray-500 rounded-lg shadow-md
+                    hover:bg-gray-800 hover:text-white hover:border-gray-800 hover:shadow-xl hover:scale-105
+                    focus:bg-gray-800 focus:text-white focus:border-gray-800 focus:outline-none
+                    active:bg-gray-900 active:text-white active:border-gray-900 active:scale-95
+                    transition-all duration-300 ease-in-out" onclick="window.location.href='#about'">Learn More</button>
+                    <button class="w-full px-6 py-3 bg-gray-800 text-white font-semibold border-2 border-gray-800 rounded-lg shadow-md
+                    hover:bg-transparent hover:text-gray-800 hover:border-gray-500 hover:shadow-xl hover:scale-105
+                    focus:bg-transparent focus:text-gray-800 focus:border-gray-800 focus:outline-none
+                    active:bg-gray-900 active:text-white active:border-gray-900 active:scale-95
+                    transition-all duration-300 ease-in-out" onclick="window.location.href='#contact'">Contact Me</button>
+                </span>
+            </div>
+            <div class="relative w-full aspect-square">
+    
+                <div class="absolute inset-0 bg-gray-900 blur-md opacity-100" style="
+                mask-image: url('assets/devIcon.png');
+                mask-size: contain;
+                mask-position: center;
+                mask-repeat: no-repeat;
+                -webkit-mask-image: url('assets/devIcon.png');
+                -webkit-mask-size: contain;
+                -webkit-mask-position: center;
+                -webkit-mask-repeat: no-repeat;
+            "></div>
+    
+                <div class="absolute inset-0 bg-gradient-to-br from-white via-gray-500 to-black" style="
+                mask-image: url('assets/devIcon.png');
+                mask-size: contain;
+                mask-position: center;
+                mask-repeat: no-repeat;
+                -webkit-mask-image: url('assets/devIcon.png');
+                -webkit-mask-size: contain;
+                -webkit-mask-position: center;
+                -webkit-mask-repeat: no-repeat;
+            "></div>
+    
+            </div>
+        </div>
     </section>
     <script>
         const navLinks = document.querySelectorAll(".nav-link");
@@ -68,6 +120,94 @@
             observer.observe(section);
         });
     </script>
+    
+    <script>
+        window.addEventListener('load', function () {
+            const icons = [
+                { class: "fa-brands fa-html5", color: "#e34f26" },
+                { class: "fa-brands fa-css3-alt", color: "#264de4" },
+                { class: "fa-brands fa-laravel", color: "#ff2d20" },
+                { class: "fa-brands fa-react", color: "#61dbfb" },
+                { class: "fa-brands fa-figma", color: "#a259ff" },
+                { class: "fa-brands fa-uncharted", color: "#005f73" },
+                { class: "fa-solid fa-photo-film", color: "#ff7f50" },
+                { class: "fa-solid fa-gamepad", color: "#f9a825" },
+                { class: "fa-solid fa-video", color: "#1e90ff" },
+                { class: "fa-solid fa-vial-circle-check", color: "#2ecc71" },
+                { class: "fa-solid fa-ellipsis", color: "#6c757d" }
+            ];
+    
+            const arena = document.getElementById('floating-icons');
+            const container = arena.querySelector('div');
+    
+            const getAreaSize = () => {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const areaWidth = Math.min(width * 0.9, 1000);
+                const areaHeight = Math.min(height * 0.9, 900);
+                container.style.width = areaWidth + 'px';
+                container.style.height = areaHeight + 'px';
+                return { width: areaWidth, height: areaHeight };
+            };
+    
+            const size = getAreaSize();
+            const iconElements = [];
+    
+            icons.forEach(icon => {
+                const el = document.createElement("i");
+                el.className = icon.class + " absolute text-3xl transition-transform duration-300";
+                el.style.color = icon.color;
+                el.style.left = Math.random() * (size.width - 100) + "px";
+                el.style.top = Math.random() * (size.height - 100) + "px";
+                el.dataset.dx = (Math.random() - 0.5) * 2.5;
+                el.dataset.dy = (Math.random() - 0.5) * 2.5;
+    
+                el.addEventListener("mouseenter", () => {
+                    el.dataset.pause = "true";
+                    el.style.transform = "scale(1.2)";
+                    el.style.textShadow = `0 0 15px ${icon.color}`;
+                });
+                el.addEventListener("mouseleave", () => {
+                    el.dataset.pause = "false";
+                    el.style.transform = "scale(1)";
+                    el.style.textShadow = "none";
+                });
+    
+                container.appendChild(el);
+                iconElements.push(el);
+            });
+    
+            setInterval(() => {
+                const bounds = getAreaSize();
+                iconElements.forEach(el => {
+                    if (el.dataset.pause === "true") return;
+    
+                    let x = parseFloat(el.style.left);
+                    let y = parseFloat(el.style.top);
+                    let dx = parseFloat(el.dataset.dx);
+                    let dy = parseFloat(el.dataset.dy);
+    
+                    x += dx;
+                    y += dy;
+    
+                    if (x < 0 || x > bounds.width - 40) {
+                        el.dataset.dx = -dx;
+                        x = Math.min(Math.max(x, 0), bounds.width - 40);
+                    }
+                    if (y < 0 || y > bounds.height - 40) {
+                        el.dataset.dy = -dy;
+                        y = Math.min(Math.max(y, 0), bounds.height - 40);
+                    }
+    
+                    el.style.left = x + "px";
+                    el.style.top = y + "px";
+                });
+            }, 30);
+    
+            window.addEventListener('resize', () => {
+                getAreaSize();
+            });
+        });
+    </script>
 </body>
-
 </html>
