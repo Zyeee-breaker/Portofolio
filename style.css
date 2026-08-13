@@ -30,3 +30,50 @@
 .nav-link.active {
     color: #000;
 }
+.floating-icon {
+    position: absolute;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: rgba(255, 255, 255, 0.1);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)); 
+}
+.invitation {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding-bottom: 8px;
+  color: #999;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Garis bawah dengan animasi loop */
+.invitation::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #272626, #86858538, #191919);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(170, 170, 170, 0.5);
+  animation: underlineLoop 3s ease-in-out infinite;
+}
+
+/* Animasi garis bawah loop dengan tema gray */
+@keyframes underlineLoop {
+  0% {
+    background-position: 0% 0;
+    opacity: 0.4;
+    box-shadow: 0 0 10px rgba(170, 170, 170, 0.4);
+  }
+  50% {
+    background-position: 100% 0;
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(200, 200, 200, 0.8);
+  }
+  100% {
+    background-position: 0% 0;
+    opacity: 0.4;
+    box-shadow: 0 0 10px rgba(170, 170, 170, 0.4);
+  }
+}
