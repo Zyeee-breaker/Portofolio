@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tejo Yudiantoro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <header
+        class="fixed top-0 left-0 right-0 bg-gray-400 text-black p-4 px-6 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center justify-between">
+            <a href="#home">
+                <span class="flex flex-col">
+                    <p class="text-xl font-bold">Tejo Yudiantoro</p>
+                    <span class="flex items-center w-60">
+                        <span class="relative flex-1 h-[2px] bg-black">
+                            <span
+                                class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-black rotate-45"></span>
+                        </span>
+                    </span>
+                </span>
+            </a>
+            <button id="menu-btn" class="md:hidden" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fa-sharp fa-solid fa-code md:text-sm"></i>
+            </button>
+        </div>
+        <nav id="nav-menu"
+            class="max-h-0 opacity-0 overflow-hidden flex flex-col gap-4 transition-all duration-300 ease-in-out md:max-h-none md:opacity-100 md:overflow-visible md:flex-row md:gap-6">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+    </header>
+    <section id="home" class="h-screen bg-gray-200 flex items-center justify-center">
+        <h1 class="text-4xl font-bold">Welcome to My Portfolio</h1>
+    </section>
+    <script>
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section[id]");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach((link) => {
+                        link.classList.remove("active");
+                    });
+
+                    const activeLink = document.querySelector(
+                        `.nav-link[href="#${entry.target.id}"]`
+                    );
+
+                    if (activeLink) {
+                        activeLink.classList.add("active");
+                    }
+                }
+            });
+        }, {
+            threshold: 0.4
+        });
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
